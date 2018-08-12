@@ -40,3 +40,31 @@ router.post('/', (req, res) => {
       res.status(500).send('Unable to fetch from database')
     })
 })
+
+router.put('/', (req, res) => {
+  const burger = req.body
+  db.editBurger(burger)
+    .then(() => {
+      res.status(200).end()
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err)
+      res.status(500).send('Unable to read from database')
+    })
+})
+
+router.delete(':/id', (req, res) => {
+  const id = req.params.id
+  db.deleteBurger(id)
+    .then(() => {
+      res.status(200).end()
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err)
+      res.status(500).send('Unable to read from db')
+    })
+})
+
+module.exports = router
